@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Custom Icons Tutorial - Leaflet</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+
+
+	<style>
+		#map {
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+
+<!-- allows to draw geojsons from github -->
+ <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	
+</head>
+<body>
+
+<div id='map'></div>
+
+<script type="text/javascript" src="http://leafletjs.com/examples/map-panes/eu-countries.js"></script>
+
+<script>
+
+// DEFINING MAP VAR
+
+	var map = L.map('map');
+
+// CREATING PANES to layer
+
+	map.createPane('labels');
+	map.getPane('labels').style.zIndex = 653;
+	map.getPane('labels').style.pointerEvents = 'none';
+
+
+
+	map.createPane('eastern');
+	map.getPane('eastern').style.zIndex = 651;
+	map.getPane('eastern').style.pointerEvents = 'none';
+
+
+
+	map.createPane('northern');
+	map.getPane('northern').style.zIndex = 650;
+	map.getPane('northern').style.pointerEvents = 'none';
+
+
+	map.createPane('western');
+	map.getPane('western').style.zIndex = 652;
+	map.getPane('western').style.pointerEvents = 'none';
+
+
+// base map?
+
+	var cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+
+	var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+		attribution: cartodbAttribution
+	}).addTo(map);
+
+// labels
+
+	var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+		attribution: cartodbAttribution,
+		pane: 'labels'
+	}).addTo(map);
+
+// EU geojson?
+
+	geojson = L.geoJson(euCountries).addTo(map);
+
+	geojson.eachLayer(function (layer) {
+		layer.bindPopup(layer.feature.properties.name);
+
+// 
+
+map.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 3);
+
+
+
+// STYLES FOR GEOJSONS
+
+        var styleeast = {
+         color:"green", opacity:".8", weight:"2",fillOpacity:".3"};
+        var styleeastmo = {
+         color:"black", opacity:".8", weight:"10", fillOpacity:".5"};
+
+
+        var stylenorth = {
+         color:"blue", opacity:".8", weight:"2",fillOpacity:".3"};
+        var stylenorthmo = {
+         color:"black", opacity:".8", weight:"10", fillOpacity:".5"};
+
+        var stylewest = {
+         color:"yellow", opacity:".8", weight:"2",fillOpacity:".3"};
+        var stylewestmo = {
+         color:"black", opacity:".8", weight:"10", fillOpacity:".5"};
+
+
+
+  function onEachFeatureeast(feature, layer) {
+      {
+          layer.bindPopup("This is <strong>Plate " + feature.properties.plate + "</strong></h1> From: <em>" + feature.properties.atlas + "</em>");
+          layer.setStyle(styleeast);
+          (function (layer, properties){
+          	layer.on("mouseover", function(e){
+          		layer.setStyle(styleeastmo);
+          	});
+          	layer.on("mouseout", function(e){
+          		layer.setStyle(styleeast);
+          	});
+          })(layer, feature.properties);
+      }
+  };
+
+
+// FUNCTION FOR GEOJSONS
+
+  function onEachFeaturenorth(feature, layer) {
+      {
+          layer.bindPopup("This is <strong>Plate " + feature.properties.plate + "</strong></h1> From: <em>" + feature.properties.atlas + "</em>");
+          layer.setStyle(stylenorth);
+          (function (layer, properties){
+          	layer.on("mouseover", function(e){
+          		layer.setStyle(stylenorthmo);
+          	});
+          	layer.on("mouseout", function(e){
+          		layer.setStyle(stylenorth);
+          	});
+          })(layer, feature.properties);
+      }
+  };
+
+
+  function onEachFeaturewest(feature, layer) {
+      {
+          layer.bindPopup("This is <strong>Plate " + feature.properties.plate + "</strong></h1> From: <em>" + feature.properties.atlas + "</em>");
+          layer.setStyle(stylewest);
+          (function (layer, properties){
+          	layer.on("mouseover", function(e){
+          		layer.setStyle(stylewestmo);
+          	});
+          	layer.on("mouseout", function(e){
+          		layer.setStyle(stylewest);
+          	});
+          })(layer, feature.properties);
+      }
+  };
+
+
+// LOADING GEOJSONS
+
+
+var geojsoneastern;
+$.getJSON("https://raw.githubusercontent.com/DanFinelli/overlapGeoJ/master/PANE_test_euEast.geojson",function(data){
+      geojsoneastern = L.geoJson(data, {onEachFeature: onEachFeatureeast, pane: 'eastern'
+      }).addTo(map);
+      });
+
+var geojsonnorthern;
+$.getJSON("https://raw.githubusercontent.com/DanFinelli/overlapGeoJ/master/PANE_test_euNorth.geojson",function(data){
+      geojsonnorthern = L.geoJson(data, {onEachFeature: onEachFeaturenorth, pane: 'northern'
+      }).addTo(map);
+      });
+
+var geojsonwestern;
+$.getJSON("https://raw.githubusercontent.com/DanFinelli/overlapGeoJ/master/PANE_test_euWest.geojson",function(data){
+      geojsonwestern = L.geoJson(data, {onEachFeature: onEachFeaturewest, pane: 'western'
+      }).addTo(map);
+      });
+
+
+
+	});
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

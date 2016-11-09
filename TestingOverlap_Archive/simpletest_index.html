@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- !!!Change the title -->
+<title>testing overlapping geoj</title>
+
+
+
+<link rel="icon" 
+      type="image/png" 
+      href="../img/brand-fav.png">
+<meta name="viewport" content="initial-scale=1.0, initial-scale=1.0">
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { 
+      height:700px; 
+      }
+  .custom-popup .leaflet-popup-content-wrapper {
+    text-align:center;
+  }
+  .custom-popup .leaflet-popup-content-wrapper a {
+  }
+  .btn-custom {
+  background-color: hsl(197, 46%, 41%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#489abb", endColorstr="#387d98");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#489abb), to(#387d98));
+  background-image: -moz-linear-gradient(top, #489abb, #387d98);
+  background-image: -ms-linear-gradient(top, #489abb, #387d98);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #489abb), color-stop(100%, #387d98));
+  background-image: -webkit-linear-gradient(top, #489abb, #387d98);
+  background-image: -o-linear-gradient(top, #489abb, #387d98);
+  background-image: linear-gradient(#489abb, #387d98);
+  border-color: #387d98 #387d98 hsl(197, 46%, 38.5%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.16);
+  -webkit-font-smoothing: antialiased;
+  }
+
+  .label-custom {
+  background-color: #939393;
+}
+
+  }
+  .navbar-brand {
+  float: none;
+  }
+</style>
+<link rel="stylesheet" type="text/css" href="../tipuesearch/tipuesearch.css" >
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/sticky-footer.css">
+<!-- Custom CSS -->
+<link href="../css/landing-page.css" rel="stylesheet">
+<!-- Custom Fonts -->
+<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#myModal').modal('show');
+    });
+</script>
+<style>
+@media screen and (min-width: 768px) {
+  #myModal .modal-dialog  {width:350px;
+  }
+}
+</style>
+</head>
+
+
+<body>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" style="padding:10px 10px 0px 10px">
+            <div id='map'class='custom-popup'></div> 
+        </div>
+    </div>
+</div>
+<!-- Bottom Text -->
+<div class="container">
+  <div class="row">
+        <div class="col-sm-12">
+
+
+        </div>
+  </div>
+
+
+    <!-- Footer 
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" >
+                    <ul class="list-inline">
+                        <li>
+                        <a href="../index.html">Home</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        
+                        <li>
+                            <a href="../menu.html">Menu</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="../about.html">About</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="../contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; 2016 Leventhal Map Center. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>-->
+
+
+<script>
+          // Tiles and loading location
+
+
+// !!!Change setView location if needed (center) - http://leafletjs.com/examples/quick-start-example.html
+
+        var map = L.map('map').setView([42.35245, -71.06489], 9);   
+
+
+
+
+       
+        L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+        }).addTo(map);
+
+          
+        var options = {
+            minZoom: 12,
+            maxZoom: 20,
+            opacity: 1.0,
+            tms: true,
+            zIndex: 2,};
+
+
+// !!!Change style to fit thumbnail (variety, use hexcode ex color:#009933)
+        // This styles the color, tranparency, and hover
+        var style = {
+         color:"green", opacity:".8", weight:"2",fillOpacity:".3"};
+        var stylemo = {
+         color:"green", opacity:".8", weight:"4", fillOpacity:".5"};
+
+
+        var style2 = {
+         color:"blue", opacity:".8", weight:"2",fillOpacity:".3"};
+        var stylemo2 = {
+         color:"blue", opacity:".8", weight:"4", fillOpacity:".5"};
+
+
+        // a popup showing the layer name, and polygon styles
+          function onEachFeature(feature, layer) {
+              {
+        layer.bindPopup("This is <strong> " + feature.properties.Plate + "</strong></h1> From: <em>" + feature.properties.Atlas + "</em>" + 
+        ' </br></br><a class="btn btn-custom btn-sm" href="' + layer.feature.properties.url + '" role="button" target="_blank">view original<\/a>');
+        layer.setStyle(style);
+          (function (layer, properties){
+          layer.on("mouseover", function(e){
+            layer.setStyle(stylemo);
+          });
+          layer.on("mouseout", function(e){
+            layer.setStyle(style);
+          });
+        })(layer, feature.properties);
+        }
+        };
+
+          function onEachFeature2(feature, layer) {
+              {
+        layer.bindPopup("This is <strong> " + feature.properties.Plate + "</strong></h1> From: <em>" + feature.properties.Atlas + "</em>" + 
+        ' </br></br><a class="btn btn-custom btn-sm" href="' + layer.feature.properties.url + '" role="button" target="_blank">view original<\/a>');
+        layer.setStyle(style2);
+          (function (layer, properties){
+          layer.on("mouseover", function(e){
+            layer.setStyle(stylemo2);
+          });
+          layer.on("mouseout", function(e){
+            layer.setStyle(style2);
+          });
+        })(layer, feature.properties);
+        }
+        };        
+
+
+
+// !!!Change .geoJson location (github, boston atlas footprint, raw URL)
+
+
+
+
+
+var geotestlayersouth;
+$.getJSON("https://raw.githubusercontent.com/DanFinelli/overlapGeoJ/master/simpletestcorrect33.geojson",function(data){
+      geotestlayersouth = L.geoJson(data, {onEachFeature: onEachFeature} ).addTo(map).bringToFront;
+      });
+
+var geotestlayermiddle;
+$.getJSON("https://raw.githubusercontent.com/DanFinelli/overlapGeoJ/master/simpletestcorrect.geojson",function(data){
+      geotestlayermiddle = L.geoJson(data, {onEachFeature: onEachFeature2} ).addTo(map).bringToFront;
+      });
+
+var geotestlayernorth;
+$.getJSON("https://raw.githubusercontent.com/DanFinelli/overlapGeoJ/master/simpletestcorrect2overlap.geojson",function(data){
+      geotestlayernorth = L.geoJson(data, {onEachFeature: onEachFeature} ).addTo(map).bringToFront;
+      });
+
+
+
+//var OrderLayers = ['geotestlayernorth', 'geotestlayersouth', 'geotestlayermiddle']
+
+//for(var i = 0 , len = OrderLayers.length; i < len; i++){
+   //eval(OrderLayers[i]).bringToFront();
+
+
+//geotestlayernorth.bringToFront();
+//geotestlayersouth.bringToFront();
+//geotestlayermiddle.bringToFront();
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47313789-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>

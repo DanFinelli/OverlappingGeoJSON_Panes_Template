@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Single atlas index</title>
+
+    <!-- Mapbox.js -->
+    <meta name="viewport" content="initial-scale=1.0, initial-scale=1.0">
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <style>
+  body { margin:0; padding:0;
+      }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+          .leaflet-control-zoom {
+              left: 9px;
+              top: 15px;
+              }
+  .custom-popup .leaflet-popup-content-wrapper {
+    text-align:center;
+  }
+  .custom-popup .leaflet-popup-content-wrapper a {
+  }
+  </style>
+
+
+
+  </head>
+  <body>
+    <div id='map'class='custom-popup'></div>
+  <script>
+  L.mapbox.accessToken = 'pk.eyJ1IjoiZXZhbnRob3JuYmVycnkiLCJhIjoiemVQMDBUdyJ9.aK0EfwMvPgquXMmxLf73lw';
+  // !!!Change setView location if needed - http://leafletjs.com/examples/quick-start-example.html
+           // Tiles and loading location
+           var tiles = L.tileLayer('http://b.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+       	transparency: true,
+       	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.  Representative of the holdings at <a href="http://maps.bpl.org" target="_blank"><strong>The Leventhal Map Center</strong></a>.'}
+       	);
+
+
+   var map = L.map('map', {
+   	maxZoom: 19,
+           minZoom: 12,
+
+
+     })
+
+ 
+
+
+
+
+       .addLayer(tiles)
+       .setView([42.35747, -71.05957], 14);
+
+
+
+  var layer1 = L.map('map2', {
+    maxZoom: 19,
+           minZoom: 12,
+           zIndex: 401
+
+
+     })
+
+
+
+          // *Change max and min zoom levels
+          var style1861 = {
+      color:"#4ba8a7", opacity:".8", weight:"2",fillOpacity:".3"};
+  var style1861mo = {
+      color:"#4ba8a7", opacity:".8", weight:"4", fillOpacity:".5"};
+  // this function creates a popup showing the layer name
+  function onEachFeature(feature, layer) {
+      {
+          layer.bindPopup("This is <strong>Plate " + feature.properties.plate + "</strong></h1> From: <em>" + feature.properties.atlas + "</em>");
+          layer.setStyle(style1861);
+          (function (layer, properties){
+          	layer.on("mouseover", function(e){
+          		layer.setStyle(style1861mo);
+          	});
+          	layer.on("mouseout", function(e){
+          		layer.setStyle(style1861);
+          	});
+          })(layer, feature.properties);
+      }
+  };
+  // !!!Change location of index .geojson
+        $.getJSON("https://raw.githubusercontent.com/ect123/Boston-Atlas-Footprints/master/index/index-bromley-1938-bostonproper.geojson", function(data){
+        L.geoJson(data, {onEachFeature: onEachFeature}).addTo(layer1);
+        });
+  </script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-47313789-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+  </body>
+  </html>

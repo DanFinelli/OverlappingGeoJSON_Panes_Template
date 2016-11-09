@@ -93,10 +93,11 @@
 
 
 <script>
-          // Tiles and loading location
 
-        var map = L.map('map') 
+    var map = L.map('map') 
  
+
+ // creating panes: the name is pane250. the zindex is 250. 250 is furthest from the user. 252 is the closest to the user. pointer events is always none (not sure why)
 
     map.createPane('pane250');
     map.getPane('pane250').style.zIndex = 250;
@@ -129,7 +130,7 @@ map.setView({ lat: 43.39707, lng: -63.77014}, 5);
             zIndex: 2,};
 
 
-
+            // style for the large geojson - the one that should be furthest from the viewrer: 250
 
 
          var stylelargegeoj = {
@@ -155,6 +156,8 @@ map.setView({ lat: 43.39707, lng: -63.77014}, 5);
 
 
 
+        // for the 251 geoj - inbetween
+
 		var stylemediumgeoj = {
          color:"#0033cc", opacity:".8", weight:".75",fillOpacity:".2"};
          var stylemediumgeojmo = {
@@ -176,7 +179,7 @@ map.setView({ lat: 43.39707, lng: -63.77014}, 5);
         }
         };
 
-
+        // 252 - the closest geoj visible to user.
 
         var stylesmallgeoj = {
          color:"#800000", opacity:".8", weight:".5",fillOpacity:".1"};
@@ -203,7 +206,7 @@ map.setView({ lat: 43.39707, lng: -63.77014}, 5);
 
 
 
-
+// loading geojsons - see sizes in the name. First the variable is set. Then ajax loads from raw github. Then we set the variable defined by its name = to the geojson layer which pulls the oneachfeature. The pane is also identified by the pane's given name 'pane250' which refers to the previous section where pane250 was set = to zindex of 250.
 
 var LARGEGEOJ;
 $.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/2-2a-27a.geojson",function(data){

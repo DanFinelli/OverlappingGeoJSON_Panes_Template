@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+<title>Testing Overlapping geoj</title>
+
+<link rel="icon" 
+      type="image/png" 
+      href="../img/brand-fav.png">
+<meta name="viewport" content="initial-scale=1.0, initial-scale=1.0">
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { 
+      height:700px; 
+      }
+  .custom-popup .leaflet-popup-content-wrapper {
+    text-align:center;
+  }
+  .custom-popup .leaflet-popup-content-wrapper a {
+  }
+  .btn-custom {
+  background-color: hsl(197, 46%, 41%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#489abb", endColorstr="#387d98");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#489abb), to(#387d98));
+  background-image: -moz-linear-gradient(top, #489abb, #387d98);
+  background-image: -ms-linear-gradient(top, #489abb, #387d98);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #489abb), color-stop(100%, #387d98));
+  background-image: -webkit-linear-gradient(top, #489abb, #387d98);
+  background-image: -o-linear-gradient(top, #489abb, #387d98);
+  background-image: linear-gradient(#489abb, #387d98);
+  border-color: #387d98 #387d98 hsl(197, 46%, 38.5%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.16);
+  -webkit-font-smoothing: antialiased;
+  }
+
+  .label-custom {
+  background-color: #939393;
+}
+
+  }
+  .navbar-brand {
+  float: none;
+  }
+</style>
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#myModal').modal('show');
+    });
+</script>
+<style>
+@media screen and (min-width: 768px) {
+  #myModal .modal-dialog  {width:350px;
+  }
+}
+
+
+
+
+
+<div class="onesixzindex" style="position: relative; z-index: 2;">
+
+var oneasix;
+$.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/1-1a-6.geojson",function(data){
+      oneasix = L.geoJson(data, {onEachFeature: onEachFeaturelarge} ).addTo(map);
+      });
+</div>
+
+
+
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" style="padding:10px 10px 0px 10px">
+            <div id='map'class='custom-popup'></div> 
+        </div>
+    </div>
+</div>
+<!-- Bottom Text -->
+<div class="container">
+  <div class="row">
+        <div class="col-sm-12">
+        </div>
+  </div>
+
+
+<script>
+
+        var map = L.map('map').setView([42.35245, -71.06489], 5);   
+
+       
+        L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+        }).addTo(map);
+
+          
+        var options = {
+            minZoom: 12,
+            maxZoom: 20,
+            opacity: 1.0,
+            tms: true,
+            zIndex: 2,};
+
+
+
+        var style = {
+         color:"green", opacity:".8", weight:"2",fillOpacity:".3"};
+        var stylemo = {
+         color:"green", opacity:".8", weight:"4", fillOpacity:".5"};
+
+
+        var style2 = {
+         color:"blue", opacity:".8", weight:"2",fillOpacity:".3"};
+        var stylemo2 = {
+         color:"blue", opacity:".8", weight:"4", fillOpacity:".5"};
+
+        var stylelarge = {
+         color:"blue", opacity:".8", weight:"5",fillOpacity:".05"};
+        var stylemolarge = {
+         color:"blue", opacity:".8", weight:"4", fillOpacity:".5"};
+
+          function onEachFeature(feature, layer) {
+              {
+        layer.bindPopup("This is Volume " + feature.properties.volume + ", Part " + feature.properties.part + ",</h1> Number " + feature.properties.number + 
+        ' </br></br><a class="btn btn-custom btn-sm" href="' + layer.feature.properties.url + '" role="button" target="_blank">view original<\/a>');
+        layer.setStyle(style);
+          (function (layer, properties){
+          layer.on("mouseover", function(e){
+            layer.setStyle(stylemo);
+          });
+          layer.on("mouseout", function(e){
+            layer.setStyle(style);
+          });
+        })(layer, feature.properties);
+        }
+        };
+
+          function onEachFeature2(feature, layer) {
+              {
+        layer.bindPopup("This is Volume " + feature.properties.volume + ", Part " + feature.properties.part + ",</h1> Number " + feature.properties.number + ' </br></br><a class="btn btn-custom btn-sm" href="' + layer.feature.properties.url + '" role="button" target="_blank">view original<\/a>');
+        layer.setStyle(style2);
+          (function (layer, properties){
+          layer.on("mouseover", function(e){
+            layer.setStyle(stylemo2);
+          });
+          layer.on("mouseout", function(e){
+            layer.setStyle(style2);
+          });
+        })(layer, feature.properties);
+        }
+        };        
+
+          function onEachFeaturelarge(feature, layer) {
+              {
+        layer.bindPopup("This is Volume " + feature.properties.volume + ", Part " + feature.properties.part + ",</h1> Number " + feature.properties.number + ' </br></br><a class="btn btn-custom btn-sm" href="' + layer.feature.properties.url + '" role="button" target="_blank">view original<\/a>');
+        layer.setStyle(stylelarge);
+          (function (layer, properties){
+          layer.on("mouseover", function(e){
+            layer.setStyle(stylemolarge);
+          });
+          layer.on("mouseout", function(e){
+            layer.setStyle(stylelarge);
+          });
+        })(layer, feature.properties);
+        }
+        }; 
+
+
+
+
+
+var oneaeight;
+$.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/1-1a-8.geojson",function(data){
+      oneaeight = L.geoJson(data, {onEachFeature: onEachFeaturelarge} ).addTo(map);
+      });
+
+var oneathirteen;
+$.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/1-1a-13.geojson",function(data){
+      oneathirteen = L.geoJson(data, {onEachFeature: onEachFeature} ).addTo(map);
+      });
+
+var onebnineteen;
+$.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/1-1b-19.geojson",function(data){
+      onebnineteen = L.geoJson(data, {onEachFeature: onEachFeature} ).addTo(map);
+      });
+
+var onebtwentytwo;
+$.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/1-1b-22.geojson",function(data){
+      onebfifteen = L.geoJson(data, {onEachFeature: onEachFeature} ).addTo(map);
+      });
+
+var oneaten;
+$.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/1-1a-10.geojson",function(data){
+      oneten = L.geoJson(data, {onEachFeature: onEachFeature} ).addTo(map);
+      });
+
+var oneafifteen;
+$.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/1-1a-15.geojson",function(data){
+      onefifteen = L.geoJson(data, {onEachFeature: onEachFeature} ).addTo(map);
+      });
+
+var onebtwentyfive;
+$.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/1-1b-25.geojson",function(data){
+      onebtwentyfive = L.geoJson(data, {onEachFeature: onEachFeature} ).addTo(map);
+      });
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47313789-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
