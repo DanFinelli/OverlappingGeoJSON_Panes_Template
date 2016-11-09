@@ -6,7 +6,7 @@ In the image below, it can be see that there are 3 rectangle polygons (green, bl
 
 ## [Step 1] Panes create layers that have and ordering sequence which can be manufactured.
 
-In the <script> and below the ‘var = map’ insert the following 3 lines of code:
+In the script and below the ‘var = map’ insert the following 3 lines of code:
 
 > map.createPane('pane250'); 
 
