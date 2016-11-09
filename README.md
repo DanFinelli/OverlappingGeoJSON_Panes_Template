@@ -29,7 +29,7 @@ zindex ___________________50:	On top of 1, but under 100
 
 zindex ___________________100:	Closest to user
 
-#### The current code from the CSS file of leaflet base tile map has panes set accordingly:
+### The current code from the CSS file of leaflet base tile map has panes set accordingly:
 
 .leaflet-pane         { z-index: 400; }
 
@@ -56,7 +56,7 @@ If you have a different base file not from leaflet. Understand that the panes sh
 Web pages automatically load HTML script from top to bottom. In theory you could just load the large polygon first and the small polygon last. Therefore, small polygon would load onto the previously loaded larger polygons. This may work, but it is not reliable due to inconsistent loading and refreshing errors. 
 Similarly, using the BringToFront and BringToBack methods can work for a small number of overlapping layers. This method will incur inconsistent loading and refreshing errors if there are too many overlapping layers.
 
-##### [Step 2] We must repeat step 1 for however many panes needed. In the example image there are 3 overlapping polygons. Therefore, 3 panes will be created for each. Enter the follow code after the 250 pane:
+## [Step 2] We must repeat step 1 for however many panes needed. In the example image there are 3 overlapping polygons. Therefore, 3 panes will be created for each. Enter the follow code after the 250 pane:
 
 Second Pane:
 
@@ -74,7 +74,7 @@ Third Pane:
 
 > map.getPane('pane252').style.pointerEvents = 'none';
 
-##### [Step 3] Next, load the geoJSON polygons and then dictate what pane they belong to. This should be done in the 'script' somewhere under the previous code:
+## [Step 3] Next, load the geoJSON polygons and then dictate what pane they belong to. This should be done in the 'script' somewhere under the previous code:
 
 
 > var LARGEGEOJ;
@@ -89,7 +89,7 @@ First a variable is created whichisnamed LARGEGEOJ. Then using AJAX the geoJSON 
 
 Finally, ‘pane: ‘pane250’’ tells the geoJSON is told which pane to live on using the panes given name. The largest polygon should be furthest away and was attached to the ‘pane250’.
 
-##### [Step 4] Add the remaining polygons and repeat step 3 with the appropriate pane:
+### [Step 4] Add the remaining polygons and repeat step 3 with the appropriate pane:
 
 > var MEDIUMGEOJ;
 
@@ -108,10 +108,11 @@ Finally, ‘pane: ‘pane250’’ tells the geoJSON is told which pane to live 
 >  });
 
 
-##### Now all the polygons are loaded and set according to the appropriate zindex/pane that allows the user to click the smallest geoJSON regardless if it is being overlapped by a larger one.
+## Now all the polygons are loaded and set according to the appropriate zindex/pane that allows the user to click the smallest geoJSON regardless if it is being overlapped by a larger one.
 
 
 The Norman B. Leventhal Map Center used this method to create a finding aide index for its collection of Des Barres Atlantic Neptune historic nautical charts and views.
+
 Browse the collection here: http://maps.bpl.org/explore/publisher/des-barres-joseph-fw-6 
 
 
