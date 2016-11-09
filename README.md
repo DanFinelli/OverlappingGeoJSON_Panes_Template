@@ -86,7 +86,7 @@ First a variable is created whichisnamed LARGEGEOJ. Then using AJAX the geoJSON 
 
 Finally, ‘pane: ‘pane250’’ tells the geoJSON is told which pane to live on using the panes given name. The largest polygon should be furthest away and was attached to the ‘pane250’.
 
-### [Step 4] Add the remaining polygons and repeat step 3 with the appropriate pane:
+## [Step 4] Add the remaining polygons and repeat step 3 with the appropriate pane:
 
 > var MEDIUMGEOJ;
 > $.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/2-2a-31.geojson",function(data){
