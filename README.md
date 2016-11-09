@@ -1,4 +1,4 @@
 # OverlappingGeoJSON_Panes_Template
 Using panes and zindex to layer overlapping geojsons
 
-![Alt text](/Readme_image_view.png "Optional title")
+![Alt text](blob/master/TemplatePNGreadme.png "Overlapping GeoJSON Polygons")
