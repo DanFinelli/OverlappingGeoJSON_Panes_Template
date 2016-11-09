@@ -78,11 +78,8 @@ Third Pane:
 
 
 > var LARGEGEOJ;
-
-> $.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/2-2a-27a.geojson",function(data){
-    
+> $.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/2-2a-27a.geojson",function(data){ 
 > LARGEGEOJ = L.geoJson(data, {onEachFeature: onEachFeaturestylelargegeoj, pane: 'pane250'}).addTo(map);
-
 >  });
 
 First a variable is created whichisnamed LARGEGEOJ. Then using AJAX the geoJSON is loaded. Next, set the variable equal to a ‘L.geoJson’ which styles the polygon using onEachFeature. The onEachFeature gives the style to the polygon, for example, the red color and opacity of the smallest geoJSON. This can be removed.
@@ -96,15 +93,10 @@ Finally, ‘pane: ‘pane250’’ tells the geoJSON is told which pane to live 
 > $.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/2-2a-31.geojson",function(data){
     
 > MEDIUMGEOJ = L.geoJson(data, {onEachFeature: onEachFeaturestylemediumgeoj, pane: 'pane251'}).addTo(map);
-
- > });
-
+> });
 > var SMALLGEOJ;
-
 > $.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/2-2a-34.geojson",function(data){
-    
 > SMALLGEOJ = L.geoJson(data, {onEachFeature: onEachFeaturestylesmallgeoj, pane: 'pane252'}).addTo(map);
-
 >  });
 
 
