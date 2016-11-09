@@ -4,7 +4,7 @@ You can see in the image below that there are 3 rectangle polygons. In order to 
 
 ![Alt text](/TemplatePNGreadme.png "Overlapping GeoJSON Polygons")
 
-## [Step 1] Panes = map layers that have and ordering sequence that can be defined.
+## [Step 1] Panes = map layers that have an ordering sequence that can be defined.
 
 In the script below the map variable:
 
@@ -21,7 +21,7 @@ Sets ‘pane250’ equal to a zindex value of ‘250’
 
 ‘zindex’ is the sequential layering indicator tool. The higher the zindex value, the closer the layer will be to the webpage viewer/user. In example image, the red polygon geoJSON should have the highest zindex. Therefore, it will be closer to the user and they will be able to click it. The lower the zindex, the further away the layer is from the user. Ideally, the large green rectangle should be behind the other two so it does not interfere with the click targeting.
 
-### Visualize the layering scheme: 
+## Visualize the layering scheme: 
 
 zindex ___________________1:	Furthest from user
 
@@ -29,7 +29,7 @@ zindex ___________________50:	On top of 1, but under 100
 
 zindex ___________________100:	Closest to user
 
-### Leaflet.js currently has panes set accordingly:
+## Leaflet.js currently has panes set accordingly:
 
 .leaflet-map-pane canvas { z-index: 100; }    
 
@@ -51,7 +51,7 @@ zindex ___________________100:	Closest to user
 
 
 
-The 3 overlapping polygons should be above the tile pane (the map tiles) which is set at 200. If the rectangle polygons under 200, the user won’t be able to see them because the map tiles would be covering it. I also wanted to keep the panes below 400 to that other feature of the maps like popup windows would still show above the overlapping polygons. Panes are relative, so as long as they are relative to a preferred layer ordering, the specific range of zindex number is not as important.
+The 3 overlapping polygons should be above the tile pane (the map tiles) which is set at 200. If the rectangle polygons are under 200, the user won’t be able to see them because the map tiles would be covering it. I also wanted to keep the panes below 400 so that other features of the maps, like popup windows, would still show above the overlapping polygons. Panes are relative, so as long as they are relative to a preferred layer ordering, the specific range of zindex number is not as important.
 
 
 ## [Step 2] Create a pane for however many panes needed:
