@@ -89,11 +89,10 @@ Finally, ‘pane: ‘pane250’’ tells the geoJSON is told which pane to live 
 ### [Step 4] Add the remaining polygons and repeat step 3 with the appropriate pane:
 
 > var MEDIUMGEOJ;
-
 > $.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/2-2a-31.geojson",function(data){
-    
 > MEDIUMGEOJ = L.geoJson(data, {onEachFeature: onEachFeaturestylemediumgeoj, pane: 'pane251'}).addTo(map);
 > });
+
 > var SMALLGEOJ;
 > $.getJSON("https://raw.githubusercontent.com/ect123/Des-Barres-findingaid/master/maps/2-2a-34.geojson",function(data){
 > SMALLGEOJ = L.geoJson(data, {onEachFeature: onEachFeaturestylesmallgeoj, pane: 'pane252'}).addTo(map);
