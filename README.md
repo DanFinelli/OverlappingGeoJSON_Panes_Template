@@ -49,7 +49,7 @@ zindex ___________________100:	Closest to user
 
 .leaflet-map-pane svg    { z-index: 200; }	
 
-These are preset in the CSS <link href> located toward the top of the html document and do not need to be entered. This is only to visualize why first pane is set to a zindex of 250. The 3 overlapping polygons should be above the tile pane (the map) which is set at 200. If I set the rectangle polygons under 200, the user wouldn’t be able to see them because the map would be covering it. I also wanted to keep the panes below 400 to that other feature of the maps like popup windows would still show above the overlapping polygons.
+These are preset in the 'CSS link href' located toward the top of the html document and do not need to be entered. This is only to visualize why first pane is set to a zindex of 250. The 3 overlapping polygons should be above the tile pane (the map) which is set at 200. If I set the rectangle polygons under 200, the user wouldn’t be able to see them because the map would be covering it. I also wanted to keep the panes below 400 to that other feature of the maps like popup windows would still show above the overlapping polygons.
 
 If you have a different base file not from leaflet. Understand that the panes should be above the tile map. Panes are relative. So as long as they are relative to a preferred layer ordering, the specific range of zindex number is not as important.
 
@@ -74,7 +74,7 @@ Third Pane:
 
 > map.getPane('pane252').style.pointerEvents = 'none';
 
-##### [Step 3] Next, load the geoJSON polygons and then dictate what pane they belong to. This should be done in the <script> somewhere under the previous code:
+##### [Step 3] Next, load the geoJSON polygons and then dictate what pane they belong to. This should be done in the 'script' somewhere under the previous code:
 
 
 > var LARGEGEOJ;
